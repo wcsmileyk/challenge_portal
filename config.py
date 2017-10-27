@@ -15,6 +15,7 @@ class Config:
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     # Flask-Security Config Options
+    SECURITY_URL_PREFIX = '/admin'
     SECURITY_REGISTERABLE = True
     SECURITY_TRACKABLE = True
     SECURITY_PASSWORD_SALT = os.environ.get('HMAC_SALT')

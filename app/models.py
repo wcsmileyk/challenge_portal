@@ -16,15 +16,36 @@ class Role(db.Model, RoleMixin):
 
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
+
     email = db.Column(db.String(255), unique=True)
     password = db.Column(db.String(255))
+
     active = db.Column(db.Boolean())
     confirmed_at = db.Column(db.DateTime())
     last_login_at = db.Column(db.DateTime())
     current_login_at = db.Column(db.DateTime())
     last_login_ip = db.Column(db.String(45))
     current_login_ip = db.Column(db.String(45))
-    login_count = db.Column(db.Integer)
+    login_count = db.Column(db.Integer())
+
+    first_name = db.Column(db.String(64))
+    last_name = db.Column(db.String(64))
+
+    github = db.Column(db.String(64))
+    about_me = db.Column(db.Text())
+    location = db.Column(db.String(64))
+
     roles = db.relationship('Role', secondary=roles_users,
                             backref=db.backref('users', lazy='dynamic'))
+
+
+class Challenge(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(80))
+    body = db.Column(db.Text())
+
+
+class Tag(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(24), unique=True)
 
