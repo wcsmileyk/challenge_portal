@@ -1,1 +1,11 @@
-{% extends 'admin/master.html' %}
+{% extends 'base.html' %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block content %}
+
+    <div class="container">
+        {{ wtf.quick_form(send_confirmation_form) }}
+
+    </div>
+
+{% endblock %}

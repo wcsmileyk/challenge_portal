@@ -32,8 +32,7 @@ def create_app(config_name):
 
     # Initialize Flask-Security
     user_datastore = SQLAlchemyUserDatastore(db, User, Role)
-    # This is an ugly fix to an issue in Flask-Security with state changes using Factory Model
-    security._state = security.init_app(app, user_datastore)
+    security.init_app(app, user_datastore)
 
     # Initialize Flask-Admin
     admin.init_app(app)
@@ -44,17 +43,6 @@ def create_app(config_name):
 
     from .admin_sec import admin_sec as admin_blueprint
     app.register_blueprint(admin_blueprint)
-
-    # TODO: This seems to have change login url to admin/login - which I don't want.
-    # Use Flask-Admin style for security
-    @security.context_processor
-    def security_context_processor():
-        return dict(
-            admin_base_template=admin.base_template,
-            admin_view=admin.index_view,
-            h=admin_helpers,
-            get_url=url_for
-        )
 
     return app
 
