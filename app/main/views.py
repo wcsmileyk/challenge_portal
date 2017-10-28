@@ -14,10 +14,10 @@ def index():
     return render_template('index.html', current_challenge=current_challenge, past_challenges=past_challenges, pagination=pagination)
 
 
-@main.route('/<challenge>')
-def challenge_detailed(challenge):
-    # current_challenge = Challenge.query.filter_by(id=challenge).first()
-    return render_template('challenge.html')
+@main.route('/<challenge_id>')
+def challenge_detailed(challenge_id):
+    challenge = Challenge.query.filter_by(id=challenge_id).first()
+    return render_template('challenge.html', challenge=challenge)
 
 
 @main.route('/<user>')

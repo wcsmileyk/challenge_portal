@@ -1,1 +1,9 @@
 {% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <h1>{{ challenge.name }}</h1>
+    <h3>{{ moment(challenge.timestamp).format('MMM Do YY') }}</h3>
+    <p>{{ challenge.body }}</p>
+</div>
+{% endblock %}
