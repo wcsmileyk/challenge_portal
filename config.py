@@ -19,12 +19,10 @@ class Config:
     SECURITY_REGISTERABLE = True
     SECURITY_TRACKABLE = True
     SECURITY_PASSWORD_SALT = os.environ.get('HMAC_SALT')
-    # TODO Convert this once I have a mail setup
-    SECURITY_SEND_REGISTER_EMAIL = False
-
-    CHALLENGE_MAIL_SUBJECT_PREFIX = '[Python Challenge]'
-    CHALLENGE_MAIL_SENDER = 'Python Challenge <admin@pythonchallenge.com>'
-    CHALLENGE_ADMIN = os.environ.get('APP_ADMIN')
+    SECURITY_CONFIRMABLE = True
+    SECURITY_RECOVERABLE = True
+    SECURITY_CHANGEABLE = True
+    SECURITY_UNAUTHORIZED_VIEW = 'main.internal_server_error'
 
     @staticmethod
     def init_app(app):
@@ -38,6 +36,15 @@ class DevelopmentConfig(Config):
     DEBUG = True
     SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'dev-db.sqlite')
 
+    # Flask-Mail setup
+    MAIL_SERVER = 'smtp.gmail.com'
+    MAIL_PORT = '587'
+    MAIL_USE_TLS = True
+    MAIL_USERNAME = os.environ.get('MAIL_USERNAME')
+    MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
+    SECURITY_EMAIL_SENDER = os.environ.get('MAIL_USERNAME')
+
+
 
 class TestingConfig(Config):
     '''Set configuration values for testing environment'''
@@ -48,6 +55,7 @@ class TestingConfig(Config):
 class ProdConfig(Config):
     '''Set configuration values for testing environment'''
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL')
+    # TODO: Set up production email
 
 
 config = {
