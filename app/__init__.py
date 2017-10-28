@@ -4,6 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_security import Security, SQLAlchemyUserDatastore, current_user
 from flask_admin import Admin, helpers as admin_helpers
 from flask_mail import Mail
+from flask_moment import Moment
 
 from config import config
 
@@ -12,6 +13,7 @@ db = SQLAlchemy()
 security = Security()
 admin = Admin(name='python challenges', template_mode='bootstrap3')
 mail = Mail()
+moment = Moment()
 
 
 def create_app(config_name):
@@ -27,6 +29,7 @@ def create_app(config_name):
     bootstrap.init_app(app)
     db.init_app(app)
     mail.init_app(app)
+    moment.init_app(app)
 
     from .models import User, Role
 

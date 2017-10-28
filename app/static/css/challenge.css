@@ -1,3 +1,27 @@
+body {
+    padding: 4px;
+}
+
 .navbar-btn {
     min-width: 80px;
+}
+
+ul.challenges {
+    list-style-type: none;
+    padding: 0px;
+    margin: 16px 0px 0px 0px;
+    border-top: 1px solid #e0e0e0;
+}
+
+ul.challenges li.challenge {
+    padding: 8px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+div.challenge-date {
+    float: right;
+}
+
+div.challenge-name {
+    font-weight: bold;
 }

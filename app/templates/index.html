@@ -2,8 +2,27 @@
 
 {% block content %}
     <div class="container">
+        <div class="jumbotron">
+            <h1>Current Challenge</h1>
+            <h3>{{ current_challenge.name }}</h3>
+            <p>{{ current_challenge.body }}</p>
+        </div>
+
+        {% for challenge in past_challenges %}
+            <ul class="challenges">
+                <li class="challenge">
+                    <div class="challenge-date">{{ moment(challenge.timestamp).fromNow() }}</div>
+{#                    <div class="challenge-date">{{ challenge.timestamp }}</div>#}
+                    <div class="challenge-name">
+                        {{ challenge.name }}
+                    </div>
+                    <div class="challenge-body">{{ challenge.body }}</div>
+                </li>
+            </ul>
+        {% endfor %}
 
 
     </div>
 
 {% endblock %}
+

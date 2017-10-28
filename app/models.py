@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from flask_security import RoleMixin, UserMixin
 
 from . import db
@@ -43,6 +45,7 @@ class Challenge(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80))
     body = db.Column(db.Text())
+    timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
 
 
 class Tag(db.Model):
