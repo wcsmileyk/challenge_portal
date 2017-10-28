@@ -4,7 +4,7 @@
     <div class="container">
         <div class="jumbotron">
             <h1>Current Challenge</h1>
-            <h3>{{ current_challenge.name }}</h3>
+            <h3><a href="{{ url_for('main.challenge_detailed', challenge=current_challenge.id) }}">{{ current_challenge.name }}</a></h3>
             <p>{{ current_challenge.body }}</p>
         </div>
 
@@ -14,7 +14,7 @@
                     <div class="challenge-date">{{ moment(challenge.timestamp).fromNow() }}</div>
 {#                    <div class="challenge-date">{{ challenge.timestamp }}</div>#}
                     <div class="challenge-name">
-                        {{ challenge.name }}
+                        <a href="{{ url_for('main.challenge_detailed', challenge=challenge.id) }}">{{ challenge.name }}</a>
                     </div>
                     <div class="challenge-body">{{ challenge.body }}</div>
                 </li>
