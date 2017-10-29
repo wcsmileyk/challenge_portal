@@ -1,14 +1,14 @@
-from flask import Flask, url_for
+from flask import Flask
+from flask_admin import Admin
 from flask_bootstrap import Bootstrap
-from flask_sqlalchemy import SQLAlchemy
-from flask_security import Security, SQLAlchemyUserDatastore, current_user
-from flask_admin import Admin, helpers as admin_helpers
 from flask_mail import Mail
 from flask_moment import Moment
+from flask_security import Security, SQLAlchemyUserDatastore
+from flask_sqlalchemy import SQLAlchemy
 
-from .hash_utils import create_hashid
-
+from app.forms import ExtendedRegisterForm
 from config import config
+from .hash_utils import create_hashid
 
 bootstrap = Bootstrap()
 db = SQLAlchemy()
@@ -36,8 +36,10 @@ def create_app(config_name):
     from .models import User, Role
 
     # Initialize Flask-Security
+    from app.forms import ExtendedRegisterForm
+
     user_datastore = SQLAlchemyUserDatastore(db, User, Role)
-    security.init_app(app, user_datastore)
+    security.init_app(app, user_datastore, confirm_register_form=ExtendedRegisterForm)
 
     # Initialize Flask-Admin
     admin.init_app(app)
