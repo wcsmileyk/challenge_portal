@@ -6,6 +6,8 @@ from flask_admin import Admin, helpers as admin_helpers
 from flask_mail import Mail
 from flask_moment import Moment
 
+from .hash_utils import create_hashid
+
 from config import config
 
 bootstrap = Bootstrap()
@@ -39,6 +41,9 @@ def create_app(config_name):
 
     # Initialize Flask-Admin
     admin.init_app(app)
+
+    # Export hashid creation to jinja templates for use
+    app.jinja_env.globals.update(create_hashid=create_hashid)
 
     # Blueprint registrations go here
     from .main import main as main_blueprint

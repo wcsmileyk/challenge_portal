@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>This will be {{ user.email }}'s profile</h1>
+
+    <a href="{{ url_for('main.edit_profile', hashid=create_hashid(user.id)) }}">Edit Profile</a>
+
+
+{% endblock %}

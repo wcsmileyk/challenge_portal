@@ -7,6 +7,11 @@
             <h1>Current Challenge</h1>
             <h3><a href="{{ url_for('main.challenge_detailed', challenge_id=current_challenge.id) }}">{{ current_challenge.name }}</a></h3>
             <p>{{ current_challenge.body }}</p>
+            {% if current_user.is_authenticated %}
+                <a class="btn btn-default" role="button" href="{{ url_for('main.submit_challenge', challenge_id=current_challenge.id, hashid=create_hashid(current_user.id)) }}">Submit Your Code</a>
+            {% else %}
+                <a class="btn btn-default" role="button" href="{{ url_for('security.login') }}">Log In to Submit</a>
+            {% endif %}
         </div>
 
         {% for challenge in past_challenges %}
